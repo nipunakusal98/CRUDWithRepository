@@ -105,7 +105,7 @@ namespace CRUDWithRepository.UI.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id) 
         {
             try
