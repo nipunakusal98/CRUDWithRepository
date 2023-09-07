@@ -1,0 +1,74 @@
+﻿@model IEnumerable<CRUDWithRepository.Core.Product>
+   
+@{
+    ViewData["Title"] = "Products";
+}
+
+<link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet"/>
+
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+<form>
+    <button asp-action="CreateorEdit" asp-controller="Product" class="btn btn-primary mb-2"> Add a new product.</button>
+<table class="display" id="myTable">
+    <thead>
+        <tr class="table-active">
+            <th>
+                @Html.DisplayNameFor(model =>model.Id)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model =>model.ProductName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model =>model.Price)
+            </th>
+
+             <th>
+                @Html.DisplayNameFor(model =>model.Qty)
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var product in Model)
+            {
+             <tr>
+                    <td>@product.Id</td>
+                    <td>@product.ProductName</td>
+                    <td>@product.Price</td>
+                    <td>@product.Qty</td>
+                    <td class="text-center">
+                        <div class="btn-group btn-group-sm">
+                                <a asp-controller="Product" asp-action="CreateorEdit" asp-route-id="@product.Id"
+                                   class="btn btn-success">Edit</a>
+                        </div>
+                        <div class="btn-group btn-group-sm">
+                                <a asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id"
+                                   class="btn btn-danger">Delete</a>
+                        </div>
+                    </td>
+             </tr>   
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5">
+                    <div>
+                        No Products At this Moment!
+                    </div>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+</form>
+
